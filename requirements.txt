@@ -1,0 +1,5 @@
+Flask==0.12.2
+Flask-RESTful==0.3.6
+gunicorn==19.7.1
+marshmallow==2.15.0
+marshmallow-enum==1.4.1
