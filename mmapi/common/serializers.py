@@ -46,7 +46,7 @@ class GameGuessResponseSchema(Schema):
 
 class GuessAttemptSchema(Schema):
     """
-    Guess attempt type serializer
+    A guess attempt nested schema serializer.
     """
     #: A single codebreaker's guess attempt.
     guess = fields.List(
