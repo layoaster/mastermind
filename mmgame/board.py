@@ -3,7 +3,7 @@ Implementation of the MasterMind game.
 """
 import random
 
-from mmapi.common.enums import KeyPegs, PegColors
+from mmgame.enums import KeyPegs, PegColors
 
 
 class MasterMindBoard:
@@ -51,7 +51,7 @@ class MasterMindBoard:
         :return: The feedback from the codemaker.
         :rtype: list
         """
-        self.history.append(code_guess)
+
         second_pass_code = []
         second_pass_guess = []
         feedback = []
@@ -68,4 +68,20 @@ class MasterMindBoard:
         color_matches = set(second_pass_code) & set(second_pass_guess)
         feedback.extend([KeyPegs.WHITE] * len(color_matches))
 
+        # Saving attempt to historic
+        self.history.append((code_guess, feedback))
+
         return feedback
+
+    def get_history(self):
+        """
+        Gets game history on a JSON format.
+
+        :return: JSON format history of guess attemps
+        :rtype dict
+        """
+
+        history_list = [{'guess': attempt[0], 'feedback': attempt[1]}
+                        for attempt in self.history]
+
+        return {'history': history_list}
