@@ -1,0 +1,19 @@
+---
+version: "2"
+
+services:
+  mastermind:
+    build: .
+    environment:
+      - PYTHONPATH=/code/etc/:$PYTHONPATH
+      - PYTHONUNBUFFERED=0
+    image: onsearch
+    networks:
+      - mmnet
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/code
+
+networks:
+  mmnet:

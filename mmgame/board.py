@@ -41,6 +41,7 @@ class MasterMindBoard:
         """
         self.code = code
         self.history = []
+        self.over = False
 
     def take_a_guess(self, code_guess):
         """
