@@ -28,7 +28,7 @@ class GameHistory(Resource):
             return jsonify(response.data)
         else:
             response = jsonify({'responseFieldErrors': response.errors})
-            response.status_code = 400
+            response.status_code = 500
             return response
 
 
@@ -52,6 +52,7 @@ class GameStart(Resource):
         app_container.game_board.restart(code=code_pattern)
 
         response = jsonify()
+        response.status_code = 201
         return response
 
 
@@ -66,6 +67,7 @@ class GameGuess(Resource):
 
         :return: Json response.
         :rtype: :class:`flask.wrappers.Response`
+        :raises GameGuessInvalidException: When the game already finished.
         """
         # Checking the game is not over
         if app_container.game_board.over:
@@ -84,5 +86,5 @@ class GameGuess(Resource):
             return jsonify(response.data)
         else:
             response = jsonify({'responseFieldErrors': response.errors})
-            response.status_code = 400
+            response.status_code = 500
             return response
