@@ -26,3 +26,11 @@ class BaseGameException(Exception):
         """
         rv = {'genericErrors': [self.message]}
         return rv
+
+
+class GameGuessInvalidException(BaseGameException):
+    """
+    Exception class, raise if the game is already over when guessing.
+    """
+    status_code = 403
+    message = 'Game is over.'

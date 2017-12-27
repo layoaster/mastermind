@@ -31,6 +31,7 @@ class MasterMindBoard:
                          for x in range(self.CODE_LENGTH)]
 
         self.history = []
+        self.over = False
 
     def restart(self, code):
         """
@@ -63,6 +64,10 @@ class MasterMindBoard:
             else:
                 second_pass_code.append(self.code[i])
                 second_pass_guess.append(code_guess[i])
+
+        # Win the game
+        if len(feedback) == self.CODE_LENGTH:
+            self.over = True
 
         # 2nd pass to find white key pegs
         color_matches = set(second_pass_code) & set(second_pass_guess)

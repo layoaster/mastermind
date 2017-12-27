@@ -5,7 +5,7 @@ from flask import jsonify
 from flask_restful import Resource
 
 from mmapi import app_container
-from mmapi.common import serializers
+from mmapi.common import exceptions, serializers
 from mmapi.common.utils import get_request_data, validation_error
 
 
@@ -67,6 +67,10 @@ class GameGuess(Resource):
         :return: Json response.
         :rtype: :class:`flask.wrappers.Response`
         """
+        # Checking the game is not over
+        if app_container.game_board.over:
+            raise exceptions.GameGuessInvalidException
+
         request_data = serializers.GameGuessSchema().load(get_request_data())
         if request_data.errors:
             return validation_error(request_data.errors)
