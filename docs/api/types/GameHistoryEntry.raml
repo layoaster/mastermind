@@ -1,0 +1,12 @@
+#%RAML 1.0 DataType
+properties:
+  guess:
+    description: The guess attempt.
+    type: array
+    items: !include ../enums/PegColors.raml
+    required: false
+  feedback:
+    description: The feedback of the game guess attempt.
+    type: array
+    items: !include ../enums/KeyPegs.raml
+    required: false

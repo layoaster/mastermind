@@ -1,0 +1,7 @@
+#%RAML 1.0 DataType
+properties:
+  codeGuess:
+    description: The codebreaker code guess.
+    type: array
+    items: !include ../enums/PegColors.raml
+    required: true

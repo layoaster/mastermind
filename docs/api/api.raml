@@ -1,0 +1,58 @@
+#%RAML 1.0
+title: MasterMind
+version: v1
+baseUri: http://localhost:8000/api
+description: "A simple REST API for the MasterMind game.
+Runs on Flask and Python 3.6."
+
+types:
+  # Enums by other types or sub-types
+  KeyPegs: !include ./enums/KeyPegs.raml
+  PegColors: !include ./enums/PegColors.raml
+
+  # Sub-types used by types
+  GameHistoryEntry: !include ./types/GameHistoryEntry.raml
+
+  # Request/response types
+  GameGuessRequest: !include ./types/GameGuessRequest.raml
+  GameGuessResponse: !include ./types/GameGuessResponse.raml
+  GameHistoryResponse: !include ./types/GameHistoryResponse.raml
+  GameStartRequest: !include ./types/GameStartRequest.raml
+
+
+/game:
+
+  /start:
+    post:
+      description: Starts a new game by setting a new codemaker's code.
+      body:
+        application/json:
+          type: GameStartRequest
+          example: !include ./examples/GameStartRequestExample.raml
+      responses:
+        201:
+          description: New game created.
+  /guess:
+    put:
+      description: Make a codebreaker guess.
+      body:
+        application/json:
+          type: GameGuessRequest
+          example: !include ./examples/GameGuessRequestExample.raml
+      responses:
+        200:
+          description: Guess was correctly processed and a feedback is returned.
+          body:
+            application/json:
+              type: GameGuessResponse
+              example: !include ./examples/GameGuessResponseExample.raml
+  /history:
+    get:
+      description: Return the entire game history.
+      responses:
+        200:
+          description: Game history correctly retrieved.
+          body:
+            application/json:
+              type: GameHistoryResponse
+              example: !include ./examples/GameHistoryResponseExample.raml

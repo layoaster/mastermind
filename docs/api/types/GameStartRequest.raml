@@ -1,0 +1,8 @@
+#%RAML 1.0 DataType
+properties:
+  codePattern:
+    description: The Codemaker code to be guessed.
+    type: array
+    items: !include ../enums/PegColors.raml
+    minItems: 4
+    required: true
